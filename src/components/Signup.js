@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import Field from './Field';
 import Btn from './Btn';
 import PreviousIcon from './PreviousIcon';
@@ -33,6 +34,19 @@ const Signup = props => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [dropdownFocused, setDropdownFocused] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setCompetition('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setFirstName('');
+      setLastName('');
+      setAgreeTerms(false);
+      setErrors({});
+    }, []),
+  );
 
   const validate = () => {
     let valid = true;
@@ -289,7 +303,7 @@ const Signup = props => {
               <Text style={{color: 'red'}}>{errors.agreeTerms}</Text>
             )}
             <View
-              style={{flexDirection: 'row', marginBottom: 40, paddingLeft: 31}}>
+              style={{flexDirection: 'row', marginBottom: 40, paddingLeft: 33}}>
               <Text style={{color: '#475467', fontSize: 13}}>and {''}</Text>
               <Text
                 style={{color: '#475467', fontWeight: 'bold', fontSize: 13}}>
